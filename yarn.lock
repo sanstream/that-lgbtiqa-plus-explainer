@@ -2717,10 +2717,10 @@ core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
 
-core-js@^3.6.5:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.7.0.tgz#b0a761a02488577afbf97179e4681bf49568520f"
-  integrity sha512-NwS7fI5M5B85EwpWuIwJN4i/fbisQUwLwiSNUWeXlkAZ0sbBjLEvLvFLf1uzAUV66PcEPt4xCGCmOZSxVf3xzA==
+core-js@^3.6.5, core-js@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.0.tgz#0fc2d4941cadf80538b030648bb64d230b4da0ce"
+  integrity sha512-W2VYNB0nwQQE7tKS7HzXd7r2y/y2SVJl4ga6oH/dnaLFzM0o2lB2P3zCkWj5Wc/zyMYjtgd5Hmhk0ObkQFZOIA==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -7619,10 +7619,10 @@ sanity-blocks-vue-component@^0.1.0:
     "@sanity/block-content-to-hyperscript" "^2.0.5"
     object-assign "^4.1.1"
 
-sanstream-design-system@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.0.tgz#9f729da15cdb5d7125eddf417e43461686d3e950"
-  integrity sha512-MjfzY7Y7uRy98qNDHjkBJT5lda7Iw0ZYDpTg+FBcSE2U0uzXQoT37g+dcoMpovB4wCdEsvVK3h8COaDqQiDNUg==
+sanstream-design-system@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.1.tgz#6de8ccc65124599cbeeaea4f0e51eb4d42dbf739"
+  integrity sha512-spJ4zpNh34Dv0geIdOJhfdVzvaLlXKYyN7sedzcCuRkCMqzp/5S8RJOwmlORzeAg9aXQcvNTxl2KW2ObsSpoTQ==
   dependencies:
     "@sanity/block-content-to-hyperscript" "^2.0.10"
     babel-plugin-prismjs "^2.0.1"
