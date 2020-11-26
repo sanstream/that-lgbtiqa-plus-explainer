@@ -7619,10 +7619,10 @@ sanity-blocks-vue-component@^0.1.0:
     "@sanity/block-content-to-hyperscript" "^2.0.5"
     object-assign "^4.1.1"
 
-sanstream-design-system@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.0.tgz#9f729da15cdb5d7125eddf417e43461686d3e950"
-  integrity sha512-MjfzY7Y7uRy98qNDHjkBJT5lda7Iw0ZYDpTg+FBcSE2U0uzXQoT37g+dcoMpovB4wCdEsvVK3h8COaDqQiDNUg==
+sanstream-design-system@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.1.tgz#6de8ccc65124599cbeeaea4f0e51eb4d42dbf739"
+  integrity sha512-spJ4zpNh34Dv0geIdOJhfdVzvaLlXKYyN7sedzcCuRkCMqzp/5S8RJOwmlORzeAg9aXQcvNTxl2KW2ObsSpoTQ==
   dependencies:
     "@sanity/block-content-to-hyperscript" "^2.0.10"
     babel-plugin-prismjs "^2.0.1"
