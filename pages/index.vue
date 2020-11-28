@@ -24,7 +24,14 @@
         </StandardParagraph>
       </summary>
       <section class="grid-main-area">
+        <SearchBox
+          class="search"
+          buttonLabel="Explain!"
+          :onSubmit="applySearchTerm"
+          :suggestions="suggestions"
+        />
         <SpectrumPositionsGraph
+          class="results"
           :ordering="ordering"
           :dataMappers="dataMappers"
           :spectraData="spectraData"
@@ -35,7 +42,8 @@
 </template>
 
 <script>
-import { DataMapper } from 'sanstream-design-system'
+import { DataMapper, Suggestion } from 'sanstream-design-system'
+import lgbtTerms from '../raw-data/lgbtia-glossary.json'
 const ordering = [
   'genderIdentity',
   'bioSex',
@@ -79,23 +87,44 @@ const dataMappers = {
   }),
 }
 
-const spectraData = {
+const emptySpectraData = {
   "ratings": {
-    "genderIdentity": [2],
-    "biologicalSex": [-2],
-    "genderTransition": [0],
-    "sexuallyAttractedTo": false,
-    "romanticallyAttractedTo": [0,1,2]
+    "genderIdentity": [],
+    "biologicalSex": [],
+    "genderTransition": [],
+    "sexuallyAttractedTo": [],
+    "romanticallyAttractedTo": []
   },
-  "description": "A transgender woman who is not sexually attracted, but can be romantically attracted to women."
+  "description": "No identity applied..."
 }
+
+const suggestions = Object.keys(lgbtTerms).map(term => {
+  return new Suggestion({
+    label: term,
+    value: term
+  })
+})
+
 export default {
    data () {
     return {
       ordering,
       dataMappers,
-      spectraData,
+      spectraData: emptySpectraData,
+      lgbtTerms,
+      suggestions,
     }
+  },
+
+  methods: {
+    applySearchTerm (typedSearchTerm) {
+      console.log(typedSearchTerm)
+      if (lgbtTerms[typedSearchTerm]) {
+        this.spectraData = lgbtTerms[typedSearchTerm]
+      } else {
+        this.spectraData = emptySpetraData
+      }
+    },
   },
 }
 </script>
@@ -105,8 +134,22 @@ export default {
   grid-column-start: 1;
   grid-column-end: 3;
 }
+
 .grid-main-area {
   grid-column-start: 3;
   grid-column-end: 9;
+  display: grid;
+  grid-template-areas:
+  'search'
+  'results';
+  gap: calc(var(--base-size) * 2);
+}
+
+.grid-main-area .search {
+  grid-area: search;
+}
+
+.grid-main-area .results {
+  grid-area: results;
 }
 </style>
