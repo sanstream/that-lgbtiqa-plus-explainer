@@ -1,55 +1,112 @@
 <template>
-  <div class="container">
-    <main>
-      <h1 class="title">
-        that-lgbtiqa-plus-explainer
+  <div class="sanstream-grid-layout-full-viewport">
+    <header
+        class="sanstream-fluid-layout"
+    >
+      <h1 class="sanstream-heading">That LGBTQIA+ Identity Explainer
+        <br/>
+        <OwnershipTag
+          :yearOfCreation="2020"
+        />
       </h1>
-     <section></section>
+    </header>
+    <main class="sanstream-grid-layout">
+      <summary class="grid-left-aside-area">
+        <StandardParagraph>
+          There are lots ways how the members of the 
+          LGBTQIA+ community identify themselves.
+          This tool tries to give some insight into their meaning.
+        </StandardParagraph>
+        <StandardParagraph>
+          It is also a way, as a LGBTQIA+ community member,
+          to share your identity without having to explain
+          it every single time.
+        </StandardParagraph>
+      </summary>
+      <section class="grid-main-area">
+        <SpectrumPositionsGraph
+          :ordering="ordering"
+          :dataMappers="dataMappers"
+          :spectraData="spectraData"
+        />
+      </section>
     </main>
   </div>
 </template>
 
 <script>
-export default {}
+import { DataMapper } from 'sanstream-design-system'
+const ordering = [
+  'genderIdentity',
+  'bioSex',
+  'transition',
+  'sexualAttraction',
+  'romanticAttraction',
+]
+const dataMappers = {
+  'genderIdentity': new DataMapper({
+    label: 'Gender identity',
+    mapper: d => d.ratings.genderIdentity,
+    dataRange: [-2, -1, 0, 1, 2],
+    dataRangeLabels: ['man', null, null, null, 'woman'],
+  }),
+  'bioSex': new DataMapper({
+    label: 'Biological sex',
+    mapper: d => d.ratings.biologicalSex,
+    dataRange: [-2, -1, 0, 1, 2],
+    dataRangeLabels: ['man', null, null, null, 'woman'],
+  }),
+  'transition': new DataMapper({
+    label: 'Gender transition',
+    mapper: d => d.ratings.genderTransition,
+    dataRange: [0, 1, 2, 4, 5],
+    dataRangeLabels: ['fully (trans)', null, null, null, 'none (cis)'],
+  }),
+  'sexualAttraction': new DataMapper({
+    label: 'Sexually attracted to',
+    mapper: d => d.ratings.sexuallyAttractedTo,
+    dataRange: [-2, -1, 0, 1, 2],
+    dataRangeLabels: ['men', null, null, null, 'women'],
+  }),
+  'romanticAttraction': new DataMapper({
+    label: 'Romantically attracted to',
+    mapper: d => d.ratings.romanticallyAttractedTo,
+    dataRange: [-2, -1, 0, 1, 2],
+    dataRangeLabels: ['men', null, null, null, 'women'],
+  }),
+  'description': new DataMapper({
+    mapper: d => d.description,
+  }),
+}
+
+const spectraData = {
+  "ratings": {
+    "genderIdentity": [2],
+    "biologicalSex": [-2],
+    "genderTransition": [0],
+    "sexuallyAttractedTo": false,
+    "romanticallyAttractedTo": [0,1,2]
+  },
+  "description": "A transgender woman who is not sexually attracted, but can be romantically attracted to women."
+}
+export default {
+   data () {
+    return {
+      ordering,
+      dataMappers,
+      spectraData,
+    }
+  },
+}
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.grid-left-aside-area {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.grid-main-area {
+  grid-column-start: 3;
+  grid-column-end: 9;
 }
 </style>
