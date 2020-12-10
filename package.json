@@ -11,7 +11,7 @@
   "dependencies": {
     "@bankai/eslint-config": "^0.2.1",
     "core-js": "^3.8.0",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.14.11",
     "sanstream-design-system": "^0.2.1"
   },
   "devDependencies": {}
