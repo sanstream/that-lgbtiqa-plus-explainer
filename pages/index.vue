@@ -11,30 +11,36 @@
       </h1>
     </header>
     <main class="sanstream-grid-layout">
-      <summary class="grid-left-aside-area">
+      <aside class="grid-left-aside-area">
         <StandardParagraph>
-          There are lots ways how the members of the 
+          There are lots ways how the members of the
           LGBTQIA+ community identify themselves.
-          This tool tries to give some insight into their meaning.
+          This tool tries to help explain the terms used for those identities.
         </StandardParagraph>
         <StandardParagraph>
           It is also a way, as a LGBTQIA+ community member,
           to share your identity without having to explain
           it every single time.
         </StandardParagraph>
-      </summary>
+      </aside>
       <section class="grid-main-area">
-        <SearchBox
+        <header
           class="search"
-          buttonLabel="Explain!"
-          :onSubmit="applySearchTerm"
-          :suggestions="suggestions"
-        />
-        <SpectrumPositionsGraph
+        >
+          <SearchBox
+            buttonLabel="Explain!"
+            :onSubmit="applySearchTerm"
+            :suggestions="suggestions"
+          />
+          <AppliedSearchTerms
+            :searchTerms="appliedSearchTerms"
+          />
+        </header>
+        <SpectrumPositionGraphs
           class="results"
           :ordering="ordering"
           :dataMappers="dataMappers"
-          :spectraData="spectraData"
+          :spectraData=" lgbtTerms[searchTerm] || emptySpectraData"
         />
       </section>
     </main>
@@ -44,6 +50,7 @@
 <script>
 import { DataMapper, Suggestion } from 'sanstream-design-system'
 import lgbtTerms from '../raw-data/lgbtia-glossary.json'
+
 const ordering = [
   'genderIdentity',
   'bioSex',
@@ -67,7 +74,7 @@ const dataMappers = {
   'transition': new DataMapper({
     label: 'Gender transition',
     mapper: d => d.ratings.genderTransition,
-    dataRange: [0, 1, 2, 4, 5],
+    dataRange: [4, 3, 2, 1, 0],
     dataRangeLabels: ['fully (trans)', null, null, null, 'none (cis)'],
   }),
   'sexualAttraction': new DataMapper({
@@ -110,20 +117,41 @@ export default {
     return {
       ordering,
       dataMappers,
-      spectraData: emptySpectraData,
       lgbtTerms,
       suggestions,
+      emptySpectraData,
+      appliedSearchTerms: [],
+      searchTerm: '',
     }
   },
 
+  mounted () {
+    this.onRouteUpdate(this.$route)
+  },
+
+  watch: {
+    $route (to) {
+      this.onRouteUpdate(to)
+    },
+  },
+
   methods: {
-    applySearchTerm (typedSearchTerm) {
-      console.log(typedSearchTerm)
-      if (lgbtTerms[typedSearchTerm]) {
-        this.spectraData = lgbtTerms[typedSearchTerm]
+    onRouteUpdate(route) {
+      if (route && route.query && route.query.searchTerm) {
+        this.searchTerm = route.query.searchTerm
+        this.appliedSearchTerms = [ route.query.searchTerm ]
       } else {
-        this.spectraData = emptySpetraData
+        this.searchTerm = ''
+        this.appliedSearchTerms = []
       }
+    },
+
+    applySearchTerm (searchTerm) {
+      this.$router.push({
+        query: {
+          searchTerm,
+        }
+      })
     },
   },
 }
