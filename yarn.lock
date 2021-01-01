@@ -3307,6 +3307,11 @@ d3@^6.1.1:
     d3-transition "2"
     d3-zoom "2"
 
+data-kraai@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/data-kraai/-/data-kraai-0.0.1.tgz#5d53767d3edcf88480fe4289c2ff7fdc50aae59a"
+  integrity sha512-9AJDre+Tc+RUKxa4pg4nHcDLykh4ZrM4/I1nc5Nov3RtWwVMKvNRPAEol70ogCm3seKmOKQAySrxZKglCwcWMA==
+
 de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
