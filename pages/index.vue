@@ -13,14 +13,16 @@
     <main class="sanstream-grid-layout">
       <aside class="grid-left-aside-area">
         <StandardParagraph>
-          There are lots ways how the members of the
+          There are lots ways of how the members of the
           LGBTQIA+ community identify themselves.
-          This tool tries to help explain the terms used for those identities.
+          A lot of those terms can be confusing when not explained.
+          This tool's purpose is to help with that.
         </StandardParagraph>
         <StandardParagraph>
-          It is also a way, as a LGBTQIA+ community member,
-          to share your identity without having to explain
-          it every single time.
+          Alternatively, if you are a LGBTQIA+ community member,
+          you can share your identity, using a link to the search result (in the address bar),
+          without having to explain
+          it every single time.<br> <br> Nifty ey?
         </StandardParagraph>
       </aside>
       <section class="grid-main-area">
@@ -32,9 +34,15 @@
             :onSubmit="applySearchTerm"
             :suggestions="suggestions"
           />
-          <AppliedSearchTerms
+          <StandardParagraph>
+            Hint: you can combine several terms like
+            <StandardLink href="?searchterm=bleh">
+              "non-binary transgender lesbian"
+            </StandardLink>. Just click on the link to see how.
+          </StandardParagraph>
+          <!-- <AppliedSearchTerms
             :searchTerms="appliedSearchTerms"
-          />
+          /> -->
         </header>
         <SpectrumPositionGraphs
           class="results"
