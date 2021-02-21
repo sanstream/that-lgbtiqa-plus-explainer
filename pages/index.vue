@@ -33,6 +33,7 @@
             buttonLabel="Explain!"
             :onSubmit="applySearchTerm"
             :suggestions="suggestions"
+            :defaultValue="searchTerm"
           />
           <StandardParagraph>
             Hint: you can combine several terms like

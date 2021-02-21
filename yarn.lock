@@ -7588,15 +7588,16 @@ sanity-blocks-vue-component@^0.1.0:
     "@sanity/block-content-to-hyperscript" "^2.0.5"
     object-assign "^4.1.1"
 
-sanstream-design-system@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.1.tgz#6de8ccc65124599cbeeaea4f0e51eb4d42dbf739"
-  integrity sha512-spJ4zpNh34Dv0geIdOJhfdVzvaLlXKYyN7sedzcCuRkCMqzp/5S8RJOwmlORzeAg9aXQcvNTxl2KW2ObsSpoTQ==
+sanstream-design-system@0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/sanstream-design-system/-/sanstream-design-system-0.2.4.tgz#79edaa3b38f66c8ef1e8aed96a834097f8fae288"
+  integrity sha512-e5d8LnofT9nbDed78hnOgi998fWi6sdKHWoQm/umDNTUVQ3Tr1XlRSMyQK8btHwTq1VHvQXRMro5okul//RWyQ==
   dependencies:
     "@sanity/block-content-to-hyperscript" "^2.0.10"
     babel-plugin-prismjs "^2.0.1"
     core-js "^3.6.5"
     d3 "^6.1.1"
+    data-kraai "^0.0.1"
     dialog-polyfill "^0.5.3"
     lodash.orderby "^4.6.0"
     moment "^2.28.0"
