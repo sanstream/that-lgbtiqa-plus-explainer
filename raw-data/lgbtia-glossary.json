@@ -293,7 +293,7 @@
 		},
 		"description": "A non-binary gender identity that falls under the genderqueer or transgender umbrellas. There is no one definition of Neutrois, since each person that self-identifies as such experiences their gender differently. The most common on are : Neutral-gender, Null-gender, Neither male nor female, Genderless and/or Agender. (Neutrois.com)"
 	},
-	"Non binary/Nonbinary/Non-binary": {
+	"Non-binary": {
 		"ratings": {
 			"genderIdentity": [-1, 0 , 1],
 			"biologicalSex": [],
@@ -404,6 +404,7 @@
 		"description": "A person may choose to identify this way to capture their gender identity as well as their lived experience as a transgender person.  "
 	},
 	"Transwoman": {
+    "shouldOverrule": ["genderIdentity", "biologicalSex"],
 		"ratings": {
 			"genderIdentity": [1, 2],
 			"biologicalSex": [-2, -1],
@@ -414,6 +415,7 @@
 		"description": "A person may choose to identify this way to capture their gender identity as well as their lived experience as a transgender person.  "
 	},
 	"Transgender": {
+    "shouldOverrule": ["genderTransition"],
 		"ratings": {
 			"genderIdentity": [],
 			"biologicalSex": [],
@@ -758,8 +760,8 @@
 			"genderIdentity": [1, 2],
 			"biologicalSex": [],
 			"genderTransition": [],
-			"sexuallyAttractedTo": [-2],
-			"romanticallyAttractedTo": [-2]
+			"sexuallyAttractedTo": [1,2],
+			"romanticallyAttractedTo": [1,2]
 		},
 		"description": "Term used to describe women who are exclusively or primarily attracted to other women in a romantic, erotic, and/or emotional sense. Not all women who engage in “homosexual behavior” identify as lesbians, and as such this label should be used with caution [See: Down Low, Bisexual, WSW]."
 	},
@@ -768,8 +770,8 @@
 			"genderIdentity": [2],
 			"biologicalSex": [],
 			"genderTransition": [],
-			"sexuallyAttractedTo": [-2],
-			"romanticallyAttractedTo": [-2]
+			"sexuallyAttractedTo": [1, 2],
+			"romanticallyAttractedTo": [1, 2]
 		},
 		"description": "Usually refers to a lesbian with a feminine gender expression. Can be used in a positive or a derogatory way, depending on who is using it. Is sometimes also used to refer to a lesbian who is seen as automatically passing for heterosexual."
 	},

@@ -49,7 +49,7 @@
           class="results"
           :ordering="ordering"
           :dataMappers="dataMappers"
-          :spectraData=" lgbtTerms[searchTerm] || emptySpectraData"
+          :spectraData="getTermsData()"
         />
       </section>
     </main>
@@ -103,16 +103,35 @@ const dataMappers = {
   }),
 }
 
-const emptySpectraData = {
-  "ratings": {
-    "genderIdentity": [],
-    "biologicalSex": [],
-    "genderTransition": [],
-    "sexuallyAttractedTo": [],
-    "romanticallyAttractedTo": []
-  },
-  "description": "No identity applied..."
+class Spectra {
+  constructor ({ratings, description}) {
+    this.ratings = {
+      genderIdentity: [],
+      biologicalSex: [],
+      genderTransition: [],
+      sexuallyAttractedTo: [],
+      romanticallyAttractedTo: [],
+    }
+    if (ratings) {
+      const { genderTransition, genderIdentity, sexuallyAttractedTo, romanticallyAttractedTo, biologicalSex
+      } = ratings
+      this.ratings = {
+        genderIdentity: Array.isArray(genderIdentity) ? [...genderIdentity ] : [],
+        biologicalSex: Array.isArray(biologicalSex) ? [...biologicalSex ] : [],
+        genderTransition: Array.isArray(genderTransition) ? [...genderTransition ] : [],
+        sexuallyAttractedTo: Array.isArray(sexuallyAttractedTo) ? [...sexuallyAttractedTo ] : [],
+        romanticallyAttractedTo: Array.isArray(romanticallyAttractedTo) ? [...romanticallyAttractedTo ] : [],
+      }
+    }
+
+    this.description = description || ''
+  }
 }
+
+const emptySpectraData = new Spectra({
+  description: "No identity applied...",
+})
+
 
 const suggestions = Object.keys(lgbtTerms).map(term => {
   return new Suggestion({
@@ -121,12 +140,18 @@ const suggestions = Object.keys(lgbtTerms).map(term => {
   })
 })
 
+const mappedLgbtTerms = new Map();
+
+Object.keys(lgbtTerms).forEach(term => {
+  mappedLgbtTerms.set(term.toLowerCase(), new Spectra(lgbtTerms[term]))
+})
+
 export default {
    data () {
     return {
       ordering,
       dataMappers,
-      lgbtTerms,
+      mappedLgbtTerms,
       suggestions,
       emptySpectraData,
       appliedSearchTerms: [],
@@ -146,11 +171,11 @@ export default {
 
   methods: {
     onRouteUpdate(route) {
-      if (route && route.query && route.query.searchTerm) {
-        this.searchTerm = route.query.searchTerm
-        this.appliedSearchTerms = route.query.searchTerm.split(' ')
+      if (route && route.query && route.query.searchterm) {
+        this.searchTerm = route.query.searchterm
+        this.appliedSearchTerms = route.query.searchterm.split(' ')
       } else {
-        this.searchTerm = ['']
+        this.searchTerm = ''
         this.appliedSearchTerms = []
       }
     },
@@ -161,6 +186,52 @@ export default {
           searchTerm,
         }
       })
+    },
+
+    getTermsData () {
+      if (this.appliedSearchTerms.length) {
+        let explanations = this.appliedSearchTerms.map((term) => {
+          if (typeof term === 'string' && mappedLgbtTerms.has(term.toLowerCase())) {
+            return mappedLgbtTerms.get(term.toLowerCase())
+          }
+        })
+        // clear out missing results (undefined/null):
+        .filter((explanation) => !!explanation)
+
+        // could not make sense out of the single word, but perhaps when
+        // combined they do make sense:
+        if (explanations.length === 0 && this.appliedSearchTerms.length) {
+          const alternativeTerm = this.appliedSearchTerms.join(' ').toLowerCase()
+          if (mappedLgbtTerms.has(alternativeTerm)) {
+            return mappedLgbtTerms.get(alternativeTerm)
+          }
+        }
+
+        if (explanations.length) {
+          // merge explainations:
+          return explanations.reduce((previousExpl, currentExpl) => {
+            const description = previousExpl.description + '\n\n' + currentExpl.description
+            const ratings = {}
+
+            Object.keys(currentExpl.ratings).forEach(identity => {
+              if (currentExpl.ratings[identity].length === 0) {
+                ratings[identity] = previousExpl.ratings[identity]
+              } else {
+                ratings[identity] = [ ...previousExpl.ratings[identity], ...currentExpl.ratings[identity]]
+                .filter((value, index, self) => self.indexOf(value) === index)
+              }
+            })
+
+          return new Spectra({
+              ratings,
+              description,
+            })
+          })
+        } else {
+          return emptySpectraData
+        }
+      }
+      else return emptySpectraData
     },
   },
 }
