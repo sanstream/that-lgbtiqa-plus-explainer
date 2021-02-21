@@ -36,7 +36,7 @@
           />
           <StandardParagraph>
             Hint: you can combine several terms like
-            <StandardLink href="?searchterm=bleh">
+            <StandardLink href="?searchterm=non-binary%20transgender%20lesbian">
               "non-binary transgender lesbian"
             </StandardLink>. Just click on the link to see how.
           </StandardParagraph>
@@ -56,8 +56,7 @@
 </template>
 
 <script>
-import { Suggestion } from 'sanstream-design-system'
-import DataKraai from 'data-kraai'
+import { Suggestion, DataKraai } from 'sanstream-design-system'
 import lgbtTerms from '../raw-data/lgbtia-glossary.json'
 
 const ordering = [
@@ -148,9 +147,9 @@ export default {
     onRouteUpdate(route) {
       if (route && route.query && route.query.searchTerm) {
         this.searchTerm = route.query.searchTerm
-        this.appliedSearchTerms = [ route.query.searchTerm ]
+        this.appliedSearchTerms = route.query.searchTerm.split(' ')
       } else {
-        this.searchTerm = ''
+        this.searchTerm = ['']
         this.appliedSearchTerms = []
       }
     },
