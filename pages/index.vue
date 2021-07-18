@@ -70,30 +70,46 @@ const ordering = [
 const dataMappers = {
   'genderIdentity': new DataKraai({
     label: 'Gender identity',
+    labelExplanation: 'Gender identity is a person mental experience of their gender.',
     mapper: d => d.ratings.genderIdentity,
     dataRange: [-2, -1, 0, 1, 2],
     dataRangeLabels: ['man', null, null, null, 'woman'],
   }),
   'bioSex': new DataKraai({
     label: 'Biological sex',
+    labelExplanation: `
+The biological sex is the sex person is born with.
+This is a spectrum, because a person sex can lie between male
+and female. This is commonly refered to as being intersex.
+Please note that a person's sex can change too. This is
+called being transgender.`,
     mapper: d => d.ratings.biologicalSex,
     dataRange: [-2, -1, 0, 1, 2],
     dataRangeLabels: ['man', null, null, null, 'woman'],
   }),
   'transition': new DataKraai({
     label: 'Gender transition',
+    labelExplanation: `
+Gender transition is the proces of changing of one side of
+the biological sex spectrum to the other.`,
     mapper: d => d.ratings.genderTransition,
     dataRange: [4, 3, 2, 1, 0],
     dataRangeLabels: ['fully (trans)', null, null, null, 'none (cis)'],
   }),
   'sexualAttraction': new DataKraai({
     label: 'Sexually attracted to',
+        labelExplanation: `
+Sexual attraction refers purely to what a person can be sexually attracted to.
+This can be different from what type of person someone is romantically attracted to.`,
     mapper: d => d.ratings.sexuallyAttractedTo,
     dataRange: [-2, -1, 0, 1, 2],
     dataRangeLabels: ['men', null, null, null, 'women'],
   }),
   'romanticAttraction': new DataKraai({
     label: 'Romantically attracted to',
+    labelExplanation: `
+Romantic attraction refers purely to what a person can be romantic attracted to.
+This can be different from what type of person someone is sexually attracted to.`,
     mapper: d => d.ratings.romanticallyAttractedTo,
     dataRange: [-2, -1, 0, 1, 2],
     dataRangeLabels: ['men', null, null, null, 'women'],
