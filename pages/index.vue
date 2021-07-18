@@ -3,55 +3,84 @@
     <header
         class="sanstream-fluid-layout"
     >
-      <h1 class="sanstream-heading">That LGBTQIA+ Identity Explainer
+      <h1 class="sanstream-heading">A LGBTQIA+ Identity Explainer
         <br/>
         <OwnershipTag
           :yearOfCreation="2020"
         />
       </h1>
     </header>
-    <main class="sanstream-grid-layout">
-      <aside class="grid-left-aside-area">
+    <main
+      class="sanstream-fluid-layout horizontal-section-spacing"
+    >
+      <header
+        class="search"
+      >
+        <SearchBox
+          buttonLabel="Explain"
+          :onSubmit="applySearchTerm"
+          :suggestions="suggestions"
+          :defaultValue="searchTerm"
+        />
         <StandardParagraph>
-          There are lots ways of how the members of the
-          LGBTQIA+ community identify themselves.
-          A lot of those terms can be confusing when not explained.
-          This tool's purpose is to help with that.
+          Hint: you can combine several terms like
+          <StandardLink href="?searchterm=non-binary%20transgender%20lesbian">
+            "non-binary transgender lesbian"
+          </StandardLink>. Just click on the link to see how.
+        </StandardParagraph>
+        <!-- <AppliedSearchTerms
+          :searchTerms="appliedSearchTerms"
+        /> -->
+      </header>
+      <SpectrumPositionGraphs
+        class="results"
+        :ordering="ordering"
+        :dataMappers="dataMappers"
+        :spectraData="getTermsData()"
+      />
+       <aside>
+        <h2 class="sanstream-heading">Motivation</h2>
+        <StandardParagraph>
+          Even as a member of the LGBTQIA+ community I sometimes
+          struggle with a sheer amount and complexity surrounding
+          the terminology of identities. In order to understand them better
+          I dove into this subject deeper.
+          Through this I discovered it was far more complicated than I thought.
+          This also explained to me why this subject can be so hard
+          to explain to someone completely unfamiliar with.
         </StandardParagraph>
         <StandardParagraph>
-          Alternatively, if you are a LGBTQIA+ community member,
-          you can share your identity, using a link to the search result (in the address bar),
-          without having to explain
-          it every single time.<br> <br> Nifty ey?
+          Being an data-visualisation nerd (another identity 😉),
+          I thought it be worthwhile to create something that helped explaining easier.
+          This app is an attempt at that.
+        </StandardParagraph>
+
+        <h2 class="sanstream-heading">Noticed a mistake?</h2>
+
+        <StandardParagraph>
+          Do you see something that is worded strangely? Do you think the results make no sense?
+          Great! The good news is that
+          <StandardLink href="https://github.com/sanstream/that-lgbtiqa-plus-explainer">
+            this app is open source
+          </StandardLink>,
+          and you can
+          <StandardLink
+            href="https://github.com/sanstream/that-lgbtiqa-plus-explainer/issues/new"
+          >
+            open a ticket
+          </StandardLink>
+          for it. If you are feeling really
+          pro-active you can even improve it yourself and provide
+          it back to me as a pull request. This will however require you to
+          do a little bit of coding and understand how pull requests work. Github wrote
+          <StandardLink
+            href="https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests"
+          >
+            a very good article
+          </StandardLink>
+          about that.
         </StandardParagraph>
       </aside>
-      <section class="grid-main-area">
-        <header
-          class="search"
-        >
-          <SearchBox
-            buttonLabel="Explain!"
-            :onSubmit="applySearchTerm"
-            :suggestions="suggestions"
-            :defaultValue="searchTerm"
-          />
-          <StandardParagraph>
-            Hint: you can combine several terms like
-            <StandardLink href="?searchterm=non-binary%20transgender%20lesbian">
-              "non-binary transgender lesbian"
-            </StandardLink>. Just click on the link to see how.
-          </StandardParagraph>
-          <!-- <AppliedSearchTerms
-            :searchTerms="appliedSearchTerms"
-          /> -->
-        </header>
-        <SpectrumPositionGraphs
-          class="results"
-          :ordering="ordering"
-          :dataMappers="dataMappers"
-          :spectraData="getTermsData()"
-        />
-      </section>
     </main>
   </div>
 </template>
@@ -254,26 +283,7 @@ export default {
 </script>
 
 <style>
-.grid-left-aside-area {
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-
-.grid-main-area {
-  grid-column-start: 3;
-  grid-column-end: 9;
-  display: grid;
-  grid-template-areas:
-  'search'
-  'results';
-  gap: calc(var(--base-size) * 2);
-}
-
-.grid-main-area .search {
-  grid-area: search;
-}
-
-.grid-main-area .results {
-  grid-area: results;
+.horizontal-section-spacing > * {
+  margin-bottom: 4rem;
 }
 </style>
