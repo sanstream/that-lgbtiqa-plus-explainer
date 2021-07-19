@@ -1,7 +1,7 @@
 <template>
   <div class="sanstream-grid-layout-full-viewport">
     <header
-        class="sanstream-fluid-layout"
+      class="sanstream-fluid-layout"
     >
       <h1 class="sanstream-heading">A LGBTQIA+ Identity Explainer
         <br/>
@@ -38,7 +38,7 @@
         :dataMappers="dataMappers"
         :spectraData="getTermsData()"
       />
-       <aside>
+      <aside>
         <h2 class="sanstream-heading">Motivation</h2>
         <StandardParagraph>
           Even as a member of the LGBTQIA+ community I sometimes
@@ -97,14 +97,14 @@ const ordering = [
   'romanticAttraction',
 ]
 const dataMappers = {
-  'genderIdentity': new DataKraai({
+  genderIdentity: new DataKraai({
     label: 'Gender identity',
     labelExplanation: 'Gender identity is a person mental experience of their gender.',
     mapper: d => d.ratings.genderIdentity,
-    dataRange: [-2, -1, 0, 1, 2],
-    dataRangeLabels: ['man', null, null, null, 'woman'],
+    dataRange: [ -2, -1, 0, 1, 2 ],
+    dataRangeLabels: [ 'man', null, null, null, 'woman' ],
   }),
-  'bioSex': new DataKraai({
+  bioSex: new DataKraai({
     label: 'Biological sex',
     labelExplanation: `
 The biological sex is the sex person is born with.
@@ -113,43 +113,43 @@ and female. This is commonly refered to as being intersex.
 Please note that a person's sex can change too. This is
 called being transgender.`,
     mapper: d => d.ratings.biologicalSex,
-    dataRange: [-2, -1, 0, 1, 2],
-    dataRangeLabels: ['man', null, null, null, 'woman'],
+    dataRange: [ -2, -1, 0, 1, 2 ],
+    dataRangeLabels: [ 'man', null, null, null, 'woman' ],
   }),
-  'transition': new DataKraai({
+  transition: new DataKraai({
     label: 'Gender transition',
     labelExplanation: `
 Gender transition is the proces of changing of one side of
 the biological sex spectrum to the other.`,
     mapper: d => d.ratings.genderTransition,
-    dataRange: [4, 3, 2, 1, 0],
-    dataRangeLabels: ['fully (trans)', null, null, null, 'none (cis)'],
+    dataRange: [ 4, 3, 2, 1, 0 ],
+    dataRangeLabels: [ 'fully (trans)', null, null, null, 'none (cis)' ],
   }),
-  'sexualAttraction': new DataKraai({
+  sexualAttraction: new DataKraai({
     label: 'Sexually attracted to',
-        labelExplanation: `
+    labelExplanation: `
 Sexual attraction refers purely to what a person can be sexually attracted to.
 This can be different from what type of person someone is romantically attracted to.`,
     mapper: d => d.ratings.sexuallyAttractedTo,
-    dataRange: [-2, -1, 0, 1, 2],
-    dataRangeLabels: ['men', null, null, null, 'women'],
+    dataRange: [ -2, -1, 0, 1, 2 ],
+    dataRangeLabels: [ 'men', null, null, null, 'women' ],
   }),
-  'romanticAttraction': new DataKraai({
+  romanticAttraction: new DataKraai({
     label: 'Romantically attracted to',
     labelExplanation: `
 Romantic attraction refers purely to what a person can be romantic attracted to.
 This can be different from what type of person someone is sexually attracted to.`,
     mapper: d => d.ratings.romanticallyAttractedTo,
-    dataRange: [-2, -1, 0, 1, 2],
-    dataRangeLabels: ['men', null, null, null, 'women'],
+    dataRange: [ -2, -1, 0, 1, 2 ],
+    dataRangeLabels: [ 'men', null, null, null, 'women' ],
   }),
-  'description': new DataKraai({
+  description: new DataKraai({
     mapper: d => d.description,
   }),
 }
 
 class Spectra {
-  constructor ({ratings, description}) {
+  constructor ({ ratings, description }) {
     this.ratings = {
       genderIdentity: [],
       biologicalSex: [],
@@ -158,14 +158,13 @@ class Spectra {
       romanticallyAttractedTo: [],
     }
     if (ratings) {
-      const { genderTransition, genderIdentity, sexuallyAttractedTo, romanticallyAttractedTo, biologicalSex
-      } = ratings
+      const { genderTransition, genderIdentity, sexuallyAttractedTo, romanticallyAttractedTo, biologicalSex } = ratings
       this.ratings = {
-        genderIdentity: Array.isArray(genderIdentity) ? [...genderIdentity ] : [],
-        biologicalSex: Array.isArray(biologicalSex) ? [...biologicalSex ] : [],
-        genderTransition: Array.isArray(genderTransition) ? [...genderTransition ] : [],
-        sexuallyAttractedTo: Array.isArray(sexuallyAttractedTo) ? [...sexuallyAttractedTo ] : [],
-        romanticallyAttractedTo: Array.isArray(romanticallyAttractedTo) ? [...romanticallyAttractedTo ] : [],
+        genderIdentity: Array.isArray(genderIdentity) ? [ ...genderIdentity ] : [],
+        biologicalSex: Array.isArray(biologicalSex) ? [ ...biologicalSex ] : [],
+        genderTransition: Array.isArray(genderTransition) ? [ ...genderTransition ] : [],
+        sexuallyAttractedTo: Array.isArray(sexuallyAttractedTo) ? [ ...sexuallyAttractedTo ] : [],
+        romanticallyAttractedTo: Array.isArray(romanticallyAttractedTo) ? [ ...romanticallyAttractedTo ] : [],
       }
     }
 
@@ -174,25 +173,24 @@ class Spectra {
 }
 
 const emptySpectraData = new Spectra({
-  description: "No identity applied...",
+  description: 'No identity applied...',
 })
-
 
 const suggestions = Object.keys(lgbtTerms).map(term => {
   return new Suggestion({
     label: term,
-    value: term
+    value: term,
   })
 })
 
-const mappedLgbtTerms = new Map();
+const mappedLgbtTerms = new Map()
 
 Object.keys(lgbtTerms).forEach(term => {
   mappedLgbtTerms.set(term.toLowerCase(), new Spectra(lgbtTerms[term]))
 })
 
 export default {
-   data () {
+  data () {
     return {
       ordering,
       dataMappers,
@@ -215,7 +213,7 @@ export default {
   },
 
   methods: {
-    onRouteUpdate(route) {
+    onRouteUpdate (route) {
       if (route && route.query && route.query.searchterm) {
         this.searchTerm = route.query.searchterm
         this.appliedSearchTerms = route.query.searchterm.split(' ')
@@ -229,19 +227,19 @@ export default {
       this.$router.push({
         query: {
           searchTerm,
-        }
+        },
       })
     },
 
     getTermsData () {
       if (this.appliedSearchTerms.length) {
-        let explanations = this.appliedSearchTerms.map((term) => {
+        const explanations = this.appliedSearchTerms.map((term) => {
           if (typeof term === 'string' && mappedLgbtTerms.has(term.toLowerCase())) {
             return mappedLgbtTerms.get(term.toLowerCase())
           }
         })
         // clear out missing results (undefined/null):
-        .filter((explanation) => !!explanation)
+          .filter((explanation) => !!explanation)
 
         // could not make sense out of the single word, but perhaps when
         // combined they do make sense:
@@ -262,12 +260,12 @@ export default {
               if (currentExpl.ratings[identity].length === 0) {
                 ratings[identity] = previousExpl.ratings[identity]
               } else {
-                ratings[identity] = [ ...previousExpl.ratings[identity], ...currentExpl.ratings[identity]]
-                .filter((value, index, self) => self.indexOf(value) === index)
+                ratings[identity] = [ ...previousExpl.ratings[identity], ...currentExpl.ratings[identity] ]
+                  .filter((value, index, self) => self.indexOf(value) === index)
               }
             })
 
-          return new Spectra({
+            return new Spectra({
               ratings,
               description,
             })
@@ -275,8 +273,7 @@ export default {
         } else {
           return emptySpectraData
         }
-      }
-      else return emptySpectraData
+      } else return emptySpectraData
     },
   },
 }
