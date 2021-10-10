@@ -18,13 +18,12 @@
       >
         <SearchBox
           buttonLabel="Explain"
-          :onSubmit="applySearchTerm"
+          :onSubmit="() => {}"
           :suggestions="suggestions"
-          :defaultValue="searchTerm"
         />
         <StandardParagraph>
           Hint: you can combine several terms like
-          <StandardLink href="?searchterm=non-binary%20transgender%20lesbian">
+          <StandardLink href="?identity=non-binary&identity=transgender&identity=lesbian">
             "non-binary transgender lesbian"
           </StandardLink>. Just click on the link to see how.
         </StandardParagraph>
@@ -33,6 +32,7 @@
         /> -->
       </header>
       <SpectrumPositionGraphs
+        data-test-e2e="SpectrumPositionGraphs"
         class="results"
         :ordering="ordering"
         :dataMappers="dataMappers"
@@ -198,7 +198,6 @@ export default {
       suggestions,
       emptySpectraData,
       appliedSearchTerms: [],
-      searchTerm: '',
     }
   },
 
@@ -214,21 +213,13 @@ export default {
 
   methods: {
     onRouteUpdate (route) {
-      if (route && route.query && route.query.searchterm) {
-        this.searchTerm = route.query.searchterm
-        this.appliedSearchTerms = route.query.searchterm.split(' ')
-      } else {
-        this.searchTerm = ''
-        this.appliedSearchTerms = []
-      }
-    },
-
-    applySearchTerm (searchTerm) {
-      this.$router.push({
-        query: {
-          searchTerm,
-        },
-      })
+      /** Using URLSearchParams instead of vue-router, because it
+       * it provides the getAll method for grabbing the data as an array, even if there
+       * is just one value.
+       * For reference: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+       */
+      const params = new URLSearchParams(window.location.search.toString())
+      this.appliedSearchTerms = params.getAll('identity')
     },
 
     getTermsData () {
