@@ -17,20 +17,31 @@
         class="search"
       >
         <SearchBox
-          buttonLabel="Explain"
+          buttonLabel="Add"
           :onSubmit="applySearchTerm"
           :suggestions="suggestions"
-          :defaultValue="searchTerm"
+          v-model="enteredTerm"
+          placeholderText="Type here to find an identity you wanna add"
         />
-        <StandardParagraph>
-          Hint: you can combine several terms like
-          <StandardLink href="?searchterm=non-binary%20transgender%20lesbian">
-            "non-binary transgender lesbian"
-          </StandardLink>. Just click on the link to see how.
-        </StandardParagraph>
-        <!-- <AppliedSearchTerms
-          :searchTerms="appliedSearchTerms"
-        /> -->
+        <h3 class="sanstream-heading">
+          {{
+            appliedSearchTerms.length ?
+              'Showing the result for' :
+              'Add some search terms'
+          }}
+        </h3>
+        <AppliedSearchTerms
+          v-model="appliedSearchTerms"
+        >
+          <template slot="noSearchTermsMessage">
+            Add some search terms, using the search box above, to explain an identity.
+            <br />
+            You can combine several terms like
+            <StandardLink href="?term=non-binary&term=transgender&term=lesbian">
+              "non-binary transgender lesbian"
+            </StandardLink>. Just click on the link to see an example.
+          </template>
+        </AppliedSearchTerms>
       </header>
       <SpectrumPositionGraphs
         class="results"
@@ -198,7 +209,7 @@ export default {
       suggestions,
       emptySpectraData,
       appliedSearchTerms: [],
-      searchTerm: '',
+      enteredTerm: '',
     }
   },
 
@@ -210,25 +221,39 @@ export default {
     $route (to) {
       this.onRouteUpdate(to)
     },
+
+    appliedSearchTerms (values) {
+      if (!values.every((value, index) => value === this.$route.query.term[index])) {
+        this.$router.push({
+          query: {
+            term: values,
+          },
+        })
+      }
+    },
   },
 
   methods: {
     onRouteUpdate (route) {
-      if (route && route.query && route.query.searchterm) {
-        this.searchTerm = route.query.searchterm
-        this.appliedSearchTerms = route.query.searchterm.split(' ')
+      if (route && route.query && route.query.term) {
+        this.appliedSearchTerms = route.query.term
+        // this.appliedSearchTerms = Array.isArray(route.query.term) ? route.query.term : [route.query.term]
       } else {
-        this.searchTerm = ''
         this.appliedSearchTerms = []
       }
     },
 
-    applySearchTerm (searchTerm) {
+    applySearchTerm () {
+      const searchTerm = this.enteredTerm
       this.$router.push({
         query: {
-          searchTerm,
+          term: Array.isArray(this.$route.query.term) ? [
+            ...this.$route.query.term,
+            searchTerm,
+          ] : [ searchTerm ],
         },
       })
+      this.enteredTerm = ''
     },
 
     getTermsData () {

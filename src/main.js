@@ -1,3 +1,5 @@
+import 'sanstream-design-system/src/tokens.css'
+import 'sanstream-design-system/src/layouts.css'
 import Vue from 'vue'
 import SDS from 'sanstream-design-system'
 import App from './App'
