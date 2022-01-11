@@ -23,13 +23,13 @@
           v-model="enteredTerm"
           placeholderText="Type here to find an identity you wanna add"
         />
-        <h3 class="sanstream-heading">
+        <h2 class="sanstream-heading">
           {{
             appliedSearchTerms.length ?
               'Showing the result for' :
               'Add some search terms'
           }}
-        </h3>
+        </h2>
         <AppliedSearchTerms
           v-model="appliedSearchTerms"
         >
@@ -307,5 +307,11 @@ export default {
 <style>
 .horizontal-section-spacing > * {
   margin-bottom: 4rem;
+}
+
+.results h3.sanstream-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Fira Code';
 }
 </style>
