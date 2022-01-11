@@ -7,11 +7,11 @@
 			"sexuallyAttractedTo": true,
 			"romanticallyAttractedTo": true
 		},
-		"description": "A sexual orientation generally characterized by feeling sexual attraction or a desire for partnered sexuality."
+		"description": "The opposite of asexual. In other words people who do feel sexual atraction to people."
   },
 	"Androgyne": {
 		"ratings": {
-			"genderIdentity": [-2, -1, 0, 1, 2],
+			"genderIdentity": [ -1, 0, 1],
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
@@ -26,7 +26,10 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": false
-		},
+    },
+    "shouldOverrule": {
+			"romanticallyAttractedTo": 5
+    },
 		"description": "A romantic orientation generally characterized by not feeling romantic attraction or a desire for romance. Aromantic people can be satisfied by friendship and other non-romantic relationships. Many aromantic people also identify with a sexual orientation, such as asexual, bisexual, etc."
 	},
 	"Asexual": {
@@ -36,7 +39,10 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": false,
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"sexuallyAttractedTo": 5
+    },
 		"description": "A broad spectrum of sexual orientations generally characterized by feeling varying degrees of sexual attraction or a desires for partnered sexuality. Asexuality is distinct from celibacy, which is the deliberate abstention from sexual activity, despite sexual desire. Some asexual people do have sex and do experience varying levels of sexual attraction. There are many diverse ways of being asexual. A person who does not experience sexual attraction can experience other forms of attraction such as romantic attraction, as physical attraction and emotional attraction are separate aspects of a person’s identity. These may or may not correlate with each other - for instance, some people are physically and romantically attracted to women. However, others might be physically attracted to all genders and only emotionally attracted to men."
 	},
 	"Bear": {
@@ -51,7 +57,7 @@
 	},
 	"Bigender": {
 		"ratings": {
-			"genderIdentity": [-2, -1, 0, 1,2],
+			"genderIdentity": [-2, -1, 0, 1, 2],
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
@@ -81,8 +87,8 @@
 	},
 	"Butch": {
 		"ratings": {
-			"genderIdentity": [0,1],
-			"biologicalSex": [],
+			"genderIdentity": [1, 0, 1],
+			"biologicalSex": [0, 1, 2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
@@ -96,7 +102,10 @@
 			"genderTransition": [2],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderTransition": 5
+    },
 		"description": "a gender identity, or performance in a gender role, that society deems to match the person’s assigned sex at birth.  The prefix cis- means on this side of or not across. A term used to highlight the privilege of people who are not transgender."
 	},
 	"Demisexual": {
@@ -112,7 +121,7 @@
 	"Femme": {
 		"ratings": {
 			"genderIdentity": [2],
-			"biologicalSex": [],
+			"biologicalSex": [1,2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
@@ -120,15 +129,15 @@
 		"description": "Historically used in the lesbian community, it is being increasingly used by other LGBTQIA people to describe gender expressions that reclaim and disrupt traditional constructs of femininity."
 	},
 	"Gay": {
-    "isPartial": true,
+    "isPartial": "Is only meaningful with some context about gender identity (man/woman)",
 		"ratings": {
 			"genderIdentity": [],
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
-		"description": "A sexual and affectional orientation toward people of the same gender."
+    },
+    "description": "A sexual and affectional orientation toward people of the same gender."
 	},
 	"Gender Fluid/Genderfluid": {
 		"ratings": {
@@ -137,7 +146,10 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 4
+    },
 		"description": "A person whose gender identification and presentation shifts, whether within or outside of societal, gender-based expectations. Being fluid in motion between two or more genders."
 	},
 	"Gender outlaw": {
@@ -147,7 +159,10 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 4
+    },
 		"description": "A person who refuses to be defined by conventional definitions of male and female. (“Gender Outlaw” by Kate Bornstein)"
 	},
 	"Gender Non conforming (GNC)": {
@@ -167,7 +182,10 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 4
+    },
 		"description": "A person whose gender identity and/or gender expression falls outside of the dominant societal norm for their assigned sex, is beyond genders, or is some combination of them."
 	},
 	"Gender Unicorn": {
@@ -177,17 +195,24 @@
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 4
+    },
 		"description": "A commonly used model to explain various aspects of one’s identity, including assigned sex at birth, gender identity, gender expression, physical attraction, and romantic attraction. The Gender Unicorn illustrates how, with the exception of assigned sex at birth, these different aspects of identity exist on spectrums. The Gender Unicorn is available at transstudent.org/gender"
 	},
 	"Gender Variant": {
+    "isPartial": "",
 		"ratings": {
 			"genderIdentity": [-1, 0, 1],
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 4
+    },
 		"description": "A person who varies from the expected characteristics of the assigned gender."
 	},
 	"Heterosexual": {
@@ -234,8 +259,8 @@
 	},
 	"Lesbian": {
 		"ratings": {
-			"genderIdentity": [1, 2],
-			"biologicalSex": [],
+			"genderIdentity": [0, 1, 2],
+			"biologicalSex": [0, 1,2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [1, 2],
 			"romanticallyAttractedTo": [1, 2]
@@ -265,11 +290,11 @@
 	},
 	"MSM": {
 		"ratings": {
-			"genderIdentity": [],
-			"biologicalSex": [],
+			"genderIdentity": [-2, -1],
+			"biologicalSex": [-2, -1],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [-2, -1],
-			"romanticallyAttractedTo": []
+			"romanticallyAttractedTo": [-2, -1]
 		},
 		"description": "an abbreviation for men who have sex with men; they may or may not identify as gay."
 	},
@@ -404,18 +429,23 @@
 		"description": "A person may choose to identify this way to capture their gender identity as well as their lived experience as a transgender person.  "
 	},
 	"Transwoman": {
-    "shouldOverrule": ["genderIdentity", "biologicalSex"],
+    "shouldOverrule": {
+      "genderIdentity": 5,
+      "biologicalSex": 4
+    },
 		"ratings": {
 			"genderIdentity": [1, 2],
 			"biologicalSex": [-2, -1],
 			"genderTransition": [2],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
 		"description": "A person may choose to identify this way to capture their gender identity as well as their lived experience as a transgender person.  "
 	},
 	"Transgender": {
-    "shouldOverrule": ["genderTransition"],
+    "shouldOverrule": {
+      "genderTransition": 4.5
+    },
 		"ratings": {
 			"genderIdentity": [],
 			"biologicalSex": [],
@@ -754,21 +784,11 @@
 			"romanticallyAttractedTo": []
 		},
 		"description": "Individual(s) born with the condition of having physical sex markers (genitals, hormones, gonads, or chromosomes) that are neither clearly male nor female. Intersex people are sometimes defined as having “ambiguous” genitalia."
-	},
-	"Lesbian": {
-		"ratings": {
-			"genderIdentity": [1, 2],
-			"biologicalSex": [],
-			"genderTransition": [],
-			"sexuallyAttractedTo": [1,2],
-			"romanticallyAttractedTo": [1,2]
-		},
-		"description": "Term used to describe women who are exclusively or primarily attracted to other women in a romantic, erotic, and/or emotional sense. Not all women who engage in “homosexual behavior” identify as lesbians, and as such this label should be used with caution [See: Down Low, Bisexual, WSW]."
-	},
+  },
 	"Lipstick Lesbian": {
 		"ratings": {
 			"genderIdentity": [2],
-			"biologicalSex": [],
+			"biologicalSex": [2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [1, 2],
 			"romanticallyAttractedTo": [1, 2]
@@ -778,7 +798,7 @@
 	"Masculine off center": {
 		"ratings": {
 			"genderIdentity": [0, 1],
-			"biologicalSex": [],
+			"biologicalSex": [0 ,1, 2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
@@ -788,10 +808,10 @@
 	"MSM": {
 		"ratings": {
 			"genderIdentity": [-2],
-			"biologicalSex": [],
+			"biologicalSex": [-2],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [-2],
-			"romanticallyAttractedTo": []
+			"romanticallyAttractedTo": [-2]
 		},
 		"description": "“men who have sex with men,” men who engage in same­sex behavior, but who may not necessarily self­identify as gay."
 	},
@@ -801,8 +821,11 @@
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [],
-			"romanticallyAttractedTo": []
-		},
+			"romanticallyAttractedTo": [-2, -1, 0, 1, 2]
+    },
+    "shouldOverrule": {
+			"romanticallyAttractedTo": 5
+    },
 		"description": "Someone who has romantic feelings for a person regardless of their sex or gender."
 	},
 	"Pansexxual": {
@@ -811,8 +834,11 @@
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [-2, -1, 0, -1, -2],
-			"romanticallyAttractedTo": []
-		},
+			"romanticallyAttractedTo": [-2, -1, 0, -1, -2]
+    },
+    "shouldOverrule": {
+			"sexuallyAttractedTo": 4
+    },
 		"description": "A person who has the potential to experience sexual, romantic, physical, and/or spiritual attraction for members of all gender identities/expressions. Passing –Being read as belonging to an identity to which you do not belong (i.e. a person of mixed racial background being read as white, a gay person being read as heterosexual, or a transitioned transgender person being read as cisgender). This should be used with caution in reference to trans people, because it can misleadingly imply that the trans person does not really belong to their gender but is merely passing as that gender."
 	},
 	"Polysexual": {
@@ -821,31 +847,36 @@
 			"biologicalSex": [],
 			"genderTransition": [],
 			"sexuallyAttractedTo": [-2, -1, 0, 1, 2],
-			"romanticallyAttractedTo": []
-		},
+			"romanticallyAttractedTo": [-2, -1, 0, 1, 2]
+    },
+    "shouldOverrule": {
+      "sexuallyAttractedTo": 4,
+      "romanticallyAttractedTo": 4
+    },
 		"description": "Being sexually and/or romantically attracted to more than one sex or gender."
 	},
 	"queer": {
 		"ratings": {
-			"genderIdentity": [],
-			"biologicalSex": [],
-			"genderTransition": [],
-			"sexuallyAttractedTo": [],
-			"romanticallyAttractedTo": []
+			"genderIdentity": true,
+			"biologicalSex": true,
+			"genderTransition": true,
+			"sexuallyAttractedTo": true,
+			"romanticallyAttractedTo": true
 		},
 		"description": "1. An umbrella term which includes lesbians, gay men, bisexuals, trans* people, intersex persons, radical sex communities, and many other sexually transgressive communities. 2. This term is sometimes used as a sexual orientation label or gender identity label used to denote a non­heterosexual or cisgender identity without having to define specifics. 3. A reclaimed word that was formerly used solely as a slur but that has been reclaimed by some folks in the LGBTQ community. Nevertheless, a sizable percentage of people to whom this term might apply still hold “queer‟to be a hateful insult."
 	},
 	"Stem": {
 		"ratings": {
 			"genderIdentity": [-1, 0 , 1],
-			"biologicalSex": [],
+			"biologicalSex": [2],
 			"genderTransition": [],
-			"sexuallyAttractedTo": [],
-			"romanticallyAttractedTo": []
+			"sexuallyAttractedTo": [0, 1, 2],
+			"romanticallyAttractedTo": [0, 1, 2]
 		},
 		"description": "A person whose gender expression falls somewhere between a stud and a femme. [See also:Femme and Stud]"
 	},
 	"Straight": {
+    "isPartial": true,
 		"ratings": {
 			"genderIdentity": [],
 			"biologicalSex": [],
@@ -854,16 +885,6 @@
 			"romanticallyAttractedTo": []
 		},
 		"description": "A man or woman who is attracted to people of the other binary gender."
-	},
-	"Straight­ting": {
-		"ratings": {
-			"genderIdentity": [],
-			"biologicalSex": [],
-			"genderTransition": [],
-			"sexuallyAttractedTo": [],
-			"romanticallyAttractedTo": []
-		},
-		"description": "A term usually applied to gay men who readily pass as heterosexual. The term implies that there is a certain way that gay men should act that is significantly different from heterosexual men. Straight­acting gay men may be critiqued by members of the LGBTQ community for seemingly accessing heterosexual privilege"
 	},
 	"Third gender": {
 		"ratings": {
@@ -877,12 +898,17 @@
 	},
 	"Transfemmenine": {
 		"ratings": {
-			"genderIdentity": [],
-			"biologicalSex": [],
-			"genderTransition": [],
+			"genderIdentity": [1, 2],
+			"biologicalSex": [-2, -1],
+			"genderTransition": [2,3,4,5],
 			"sexuallyAttractedTo": [],
 			"romanticallyAttractedTo": []
-		},
+    },
+    "shouldOverrule": {
+			"genderIdentity": 5,
+			"biologicalSex": 5,
+			"genderTransition": 5
+    },
 		"description": "1. An umbrella term used to describe those who were assigned male at birth (AMAB), but identify as more female than male. Can include both trans women and non­binary trans people. 2. An AMAB person who identifies as trans and to some degree identifies with femaleness or womanhood, but does not identify completely or solely as a woman. It should be noted that trans feminine is not a descriptor of gender expression but of identity. Trans feminine people do not necessarily have to be stereotypically feminine in their interests or even presentation."
 	}
 }
