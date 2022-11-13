@@ -40,9 +40,18 @@
         </StandardParagraph>
         <SearchBox
           buttonLabel="Add term"
-          :onSubmit="() => {}"
+          :onSubmit="applySearchTerm"
           :suggestions="suggestions"
+          v-model="enteredTerm"
+          placeholderText="Type here to find an identity you wanna add"
         />
+        <h2 class="sanstream-heading">
+          {{
+            appliedSearchTerms.length ?
+              'Showing the result for' :
+              'Add some search terms'
+          }}
+        </h2>
       </header>
       <SpectrumPositionGraphs
         data-test-e2e="SpectrumPositionGraphs"
@@ -212,6 +221,7 @@ export default {
       suggestions,
       emptySpectraData,
       appliedSearchTerms: [],
+      enteredTerm: '',
     }
   },
   mounted () {
@@ -220,6 +230,16 @@ export default {
   watch: {
     $route (to) {
       this.onRouteUpdate(to)
+    },
+
+    appliedSearchTerms (values) {
+      if (!values.every((value, index) => value === this.$route.query.term[index])) {
+        this.$router.push({
+          query: {
+            term: values,
+          },
+        })
+      }
     },
   },
   methods: {
@@ -232,6 +252,20 @@ export default {
       const params = new URLSearchParams(window.location.search.toString())
       this.appliedSearchTerms = params.getAll('identity')
     },
+
+    applySearchTerm () {
+      const searchTerm = this.enteredTerm
+      this.$router.push({
+        query: {
+          identity: Array.isArray(this.$route.query.identity) ? [
+            ...this.$route.query.identity,
+            searchTerm,
+          ] : [ searchTerm ],
+        },
+      })
+      this.enteredTerm = ''
+    },
+
     getTermsData () {
       if (this.appliedSearchTerms.length) {
         const explanations = this.appliedSearchTerms.map((term) => {
@@ -315,5 +349,11 @@ export default {
 <style>
 .horizontal-section-spacing > * {
   margin-bottom: 4rem;
+}
+
+.results h3.sanstream-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Fira Code';
 }
 </style>
