@@ -272,7 +272,25 @@ export default {
         }
       } else { return emptySpectraData }
     },
-      } else return emptySpectraData
+    addIdentityTerm (term) {
+      let identity = []
+      const oldIdentities = this.$route.query?.identity
+      if (oldIdentities) {
+        if (Array.isArray(oldIdentities)) {
+          oldIdentities.push(term)
+          identity = oldIdentities
+        } else {
+          identity = [ oldIdentities, term ]
+        }
+      } else {
+        identity = [ term ]
+      }
+      this.$router.push({
+        query: {
+          identity,
+        },
+      })
+    },
 
     removeIdentityTerm (term) {
       const oldIdentities = this.$route.query?.identity
