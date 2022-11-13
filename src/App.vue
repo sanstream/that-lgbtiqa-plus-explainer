@@ -16,20 +16,33 @@
       <header
         class="search"
       >
-        <SearchBox
-          buttonLabel="Explain"
-          :onSubmit="() => {}"
-          :suggestions="suggestions"
-        />
+
+        <StandardParagraph>
+          <template v-if="appliedSearchTerms.length">
+            You looked for:
+            <AppliedSearchTerm
+              v-for="term in appliedSearchTerms"
+              :key="term"
+              :term="term"
+              @click="removeIdentityTerm"
+            />
+          </template>
+          <template v-else>
+            You can combine any terms to create more complex definitions.
+            Please use the search field below to find any identity.
+          </template>
+        </StandardParagraph>
         <StandardParagraph>
           Hint: you can combine several terms like
           <StandardLink href="?identity=non-binary&identity=transgender&identity=lesbian">
             "non-binary transgender lesbian"
           </StandardLink>. Just click on the link to see how.
         </StandardParagraph>
-        <!-- <AppliedSearchTerms
-          :searchTerms="appliedSearchTerms"
-        /> -->
+        <SearchBox
+          buttonLabel="Add term"
+          :onSubmit="() => {}"
+          :suggestions="suggestions"
+        />
       </header>
       <SpectrumPositionGraphs
         data-test-e2e="SpectrumPositionGraphs"
@@ -88,6 +101,7 @@
 <script>
 import { Suggestion, DataKraai } from 'sanstream-design-system'
 import lgbtTerms from '../raw-data/lgbtia-glossary.json'
+import AppliedSearchTerm from './components/AppliedSearchTerm'
 
 const ordering = [
   'genderIdentity',
@@ -200,28 +214,24 @@ export default {
       appliedSearchTerms: [],
     }
   },
-
   mounted () {
     this.onRouteUpdate(this.$route)
   },
-
   watch: {
     $route (to) {
       this.onRouteUpdate(to)
     },
   },
-
   methods: {
     onRouteUpdate (route) {
       /** Using URLSearchParams instead of vue-router, because it
-       * it provides the getAll method for grabbing the data as an array, even if there
-       * is just one value.
-       * For reference: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-       */
+             * it provides the getAll method for grabbing the data as an array, even if there
+             * is just one value.
+             * For reference: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+             */
       const params = new URLSearchParams(window.location.search.toString())
       this.appliedSearchTerms = params.getAll('identity')
     },
-
     getTermsData () {
       if (this.appliedSearchTerms.length) {
         const explanations = this.appliedSearchTerms.map((term) => {
@@ -231,7 +241,6 @@ export default {
         })
         // clear out missing results (undefined/null):
           .filter((explanation) => !!explanation)
-
         // could not make sense out of the single word, but perhaps when
         // combined they do make sense:
         if (explanations.length === 0 && this.appliedSearchTerms.length) {
@@ -240,13 +249,11 @@ export default {
             return mappedLgbtTerms.get(alternativeTerm)
           }
         }
-
         if (explanations.length) {
           // merge explainations:
           return explanations.reduce((previousExpl, currentExpl) => {
             const description = previousExpl.description + '\n\n' + currentExpl.description
             const ratings = {}
-
             Object.keys(currentExpl.ratings).forEach(identity => {
               if (currentExpl.ratings[identity].length === 0) {
                 ratings[identity] = previousExpl.ratings[identity]
@@ -255,7 +262,6 @@ export default {
                   .filter((value, index, self) => self.indexOf(value) === index)
               }
             })
-
             return new Spectra({
               ratings,
               description,
@@ -264,9 +270,27 @@ export default {
         } else {
           return emptySpectraData
         }
+      } else { return emptySpectraData }
+    },
       } else return emptySpectraData
+
+    removeIdentityTerm (term) {
+      const oldIdentities = this.$route.query?.identity
+      let identity = null
+      if (oldIdentities) {
+        if (Array.isArray(oldIdentities)) {
+          identity = oldIdentities
+            .filter(identityTerm => identityTerm !== term)
+        }
+      }
+      this.$router.push({
+        query: {
+          identity,
+        },
+      })
     },
   },
+  components: { AppliedSearchTerm },
 }
 </script>
 
