@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "core-js": "^3.15.2",
+    "data-kraai": "^0.0.2",
     "eslint-plugin-vue": "^7.14.0",
     "sanstream-design-system": "0.2.4",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.2"
+    "vue-router": "^3.5.2",
+    "vue-types": "^4.2.1"
   },
   "devDependencies": {
     "@bankai/eslint-config": "^0.3.0",

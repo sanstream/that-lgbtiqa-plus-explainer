@@ -40,26 +40,24 @@
         </StandardParagraph>
         <SearchBox
           buttonLabel="Add term"
-          :onSubmit="applySearchTerm"
+          :onSubmit="addIdentityTerm"
           :suggestions="suggestions"
           v-model="enteredTerm"
           placeholderText="Type here to find an identity you wanna add"
         />
-        <h2 class="sanstream-heading">
-          {{
-            appliedSearchTerms.length ?
-              'Showing the result for' :
-              'Add some search terms'
-          }}
-        </h2>
       </header>
-      <SpectrumPositionGraphs
-        data-test-e2e="SpectrumPositionGraphs"
-        class="results"
-        :ordering="ordering"
-        :dataMappers="dataMappers"
-        :spectraData="getTermsData()"
-      />
+      <section>
+        <h2 class="sanstream-heading">
+          Results
+        </h2>
+        <SpectrumPositionGraphs
+          data-test-e2e="SpectrumPositionGraphs"
+          class="results"
+          :ordering="ordering"
+          :dataMappers="dataMappers"
+          :spectraData="spectrumData"
+        />
+      </section>
       <aside>
         <h2 class="sanstream-heading">Motivation</h2>
         <StandardParagraph>
@@ -108,7 +106,8 @@
 </template>
 
 <script>
-import { Suggestion, DataKraai } from 'sanstream-design-system'
+import { Suggestion } from 'sanstream-design-system'
+import DataKraai from 'data-kraai'
 import lgbtTerms from '../raw-data/lgbtia-glossary.json'
 import AppliedSearchTerm from './components/AppliedSearchTerm'
 import SpectrumPositionGraphs from './components/SpectrumPositionGraphs'
@@ -221,53 +220,21 @@ export default {
       mappedLgbtTerms,
       suggestions,
       emptySpectraData,
-      appliedSearchTerms: [],
       enteredTerm: '',
     }
   },
-  mounted () {
-    this.onRouteUpdate(this.$route)
-  },
-  watch: {
-    $route (to) {
-      this.onRouteUpdate(to)
-    },
 
-    appliedSearchTerms (values) {
-      if (!values.every((value, index) => value === this.$route.query.term[index])) {
-        this.$router.push({
-          query: {
-            term: values,
-          },
-        })
+  computed: {
+    appliedSearchTerms () {
+      const identities = this.$route.query?.identity
+      if (identities) {
+        return Array.isArray(identities) ? identities : [ identities ]
+      } else {
+        return []
       }
     },
-  },
-  methods: {
-    onRouteUpdate (route) {
-      /** Using URLSearchParams instead of vue-router, because it
-             * it provides the getAll method for grabbing the data as an array, even if there
-             * is just one value.
-             * For reference: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-             */
-      const params = new URLSearchParams(window.location.search.toString())
-      this.appliedSearchTerms = params.getAll('identity')
-    },
 
-    applySearchTerm () {
-      const searchTerm = this.enteredTerm
-      this.$router.push({
-        query: {
-          identity: Array.isArray(this.$route.query.identity) ? [
-            ...this.$route.query.identity,
-            searchTerm,
-          ] : [ searchTerm ],
-        },
-      })
-      this.enteredTerm = ''
-    },
-
-    getTermsData () {
+    spectrumData () {
       if (this.appliedSearchTerms.length) {
         const explanations = this.appliedSearchTerms.map((term) => {
           if (typeof term === 'string' && mappedLgbtTerms.has(term.toLowerCase())) {
@@ -307,36 +274,30 @@ export default {
         }
       } else { return emptySpectraData }
     },
+
+  },
+  methods: {
     addIdentityTerm (term) {
-      let identity = []
-      const oldIdentities = this.$route.query?.identity
-      if (oldIdentities) {
-        if (Array.isArray(oldIdentities)) {
-          oldIdentities.push(term)
-          identity = oldIdentities
-        } else {
-          identity = [ oldIdentities, term ]
-        }
-      } else {
-        identity = [ term ]
+      const identity = [
+        ...this.appliedSearchTerms,
+      ]
+      if (!identity.includes(term)) {
+        identity.push(term)
+        this.$router.push({
+          name: 'home',
+          query: {
+            identity,
+          },
+        })
       }
-      this.$router.push({
-        query: {
-          identity,
-        },
-      })
     },
 
     removeIdentityTerm (term) {
-      const oldIdentities = this.$route.query?.identity
-      let identity = null
-      if (oldIdentities) {
-        if (Array.isArray(oldIdentities)) {
-          identity = oldIdentities
-            .filter(identityTerm => identityTerm !== term)
-        }
-      }
+      const identity = [
+        ...this.appliedSearchTerms,
+      ].filter(identityTerm => identityTerm !== term)
       this.$router.push({
+        name: 'home',
         query: {
           identity,
         },

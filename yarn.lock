@@ -3459,6 +3459,11 @@ data-kraai@^0.0.1:
   resolved "https://registry.yarnpkg.com/data-kraai/-/data-kraai-0.0.1.tgz#5d53767d3edcf88480fe4289c2ff7fdc50aae59a"
   integrity sha512-9AJDre+Tc+RUKxa4pg4nHcDLykh4ZrM4/I1nc5Nov3RtWwVMKvNRPAEol70ogCm3seKmOKQAySrxZKglCwcWMA==
 
+data-kraai@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/data-kraai/-/data-kraai-0.0.2.tgz#041640bce561c5f2ee80f6c3e7f9b5efcc8328ee"
+  integrity sha512-6tuZ10PWcKPBj4qVHiwRoZhFxwjPG3zLHmGSB9ukAdHFbaPyQn3/RrS1vvPW/wbVOe/PcFh2yvtN9J+ySYta3g==
+
 date-fns@^1.27.2:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
@@ -5668,6 +5673,11 @@ is-plain-object@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
   integrity sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==
+
+is-plain-object@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
+  integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
 
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
@@ -9394,6 +9404,13 @@ vue-types@^2.0.1:
   integrity sha512-pLTOquc/x5uvVLZBjEKwC8e3eni17wv9M/2XdYbDQ/93pk3vW6eXvoynMw0ACBvHad7GgQ92F+D+C7d7e5msBw==
   dependencies:
     is-plain-object "3.0.1"
+
+vue-types@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/vue-types/-/vue-types-4.2.1.tgz#f8f7e5fb42d4a6acda6d92c9736b510e5534c753"
+  integrity sha512-DNQZmJuOvovLUIp0BENRkdnZHbI0V4e2mNvjAZOAXKD56YGvRchtUYOXA/XqTxdv7Ng5SJLZqRKRpAhm5NLaPQ==
+  dependencies:
+    is-plain-object "5.0.0"
 
 vue@2.6.11:
   version "2.6.11"
