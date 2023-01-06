@@ -111,6 +111,7 @@
 import { Suggestion, DataKraai } from 'sanstream-design-system'
 import lgbtTerms from '../raw-data/lgbtia-glossary.json'
 import AppliedSearchTerm from './components/AppliedSearchTerm'
+import SpectrumPositionGraphs from './components/SpectrumPositionGraphs'
 
 const ordering = [
   'genderIdentity',
@@ -342,7 +343,7 @@ export default {
       })
     },
   },
-  components: { AppliedSearchTerm },
+  components: { AppliedSearchTerm, SpectrumPositionGraphs },
 }
 </script>
 
